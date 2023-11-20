@@ -1,0 +1,16 @@
+ngx_addon_name=ngx_stream_lua_upstream_module
+STREAM_LUA_UPSTREAM_SRCS="$ngx_addon_dir/src/ngx_stream_lua_upstream_module.c"
+
+if test -n "$ngx_module_link"; then
+    ngx_module_type=STREAM
+    ngx_module_name=$ngx_addon_name
+    ngx_module_srcs="$STREAM_LUA_UPSTREAM_SRCS"
+
+    . auto/module
+else
+    STREAM_MODULES="$STREAM_MODULES $ngx_addon_name"
+    NGX_ADDON_SRCS="$NGX_ADDON_SRCS $STREAM_LUA_UPSTREAM_SRCS"
+
+    CORE_INCS="$CORE_INCS $ngx_module_incs"
+    CORE_LIBS="$CORE_LIBS $ngx_module_libs"
+fi
